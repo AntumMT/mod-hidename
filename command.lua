@@ -19,8 +19,39 @@ else
 end
 
 
--- Default alpha level (FIXME: Should be player attribute)
-local stored_alpha = 255
+-- "nametag" chat command
+local params = {
+	S('hide'),
+	S('show'),
+	S('status'),
+}
+
+local params_string = '[' .. table.concat(params, '|') .. ']'
+
+core.register_chatcommand(S('nametag'), {
+	params = params_string,
+	description = S('Get nametag info or set visibility'),
+	func = function(name, param)
+		-- Split parameters into case-insensitive list
+		param = string.split(string.lower(param), ' ')
+		
+		local mode = param[1]
+		
+		-- Default to "status"
+		if mode == nil or mode == 'status' then
+			hidename.tellStatus(name)
+			return true
+		elseif mode == 'hide' then
+			return hidename.hide(name)
+		elseif mode == 'show' then
+			return hidename.show(name)
+		end
+		
+		core.chat_send_player(name, S('Unknown parameter:') .. ' ' .. mode)
+		return false
+	end
+})
+
 
 -- "hidename" chat command
 core.register_chatcommand(S('hidename'), {

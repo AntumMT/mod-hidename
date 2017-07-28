@@ -32,19 +32,19 @@
 local stored_alpha = 255
 
 -- The "hidename" chat command
-minetest.register_chatcommand('hidename', {
+core.register_chatcommand('hidename', {
 	description = 'Hide or show nametag',
 	func = function(name, param)
-		local player = minetest.get_player_by_name(name)
+		local player = core.get_player_by_name(name)
 		local nametag_color = player:get_nametag_attributes().color
 		local alpha = nametag_color.a
 		
 		if alpha == 0 then
-			minetest.chat_send_player(name, 'Setting nametag shown')
+			core.chat_send_player(name, 'Setting nametag shown')
 			
 			nametag_color.a = stored_alpha
 		else
-			minetest.chat_send_player(name, 'Setting nametag hidden')
+			core.chat_send_player(name, 'Setting nametag hidden')
 			
 			nametag_color.a = 0
 		end

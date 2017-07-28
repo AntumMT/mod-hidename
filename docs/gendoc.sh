@@ -7,4 +7,4 @@ CONFIG="${DOCS}/config.ld"
 OUT="${DOCS}"
 
 cd "${ROOT}"
-ldoc -B -c "${CONFIG}" -d "${OUT}" api.lua
+ldoc -B -c "${CONFIG}" -d "${OUT}" ./

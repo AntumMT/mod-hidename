@@ -33,5 +33,11 @@ A Minetest mod for hiding player nametags from view.
 - **Required:** none
 
 
+---
+### **TODO**
+
+- Use empty nametag instead of transparency
+
+
 [Minetest]: http://www.minetest.net/
 [intllib]: https://forum.minetest.net/viewtopic.php?t=4929

@@ -24,7 +24,7 @@ local stored_alpha = 255
 
 -- "hidename" chat command
 core.register_chatcommand(S('hidename'), {
-	description = S('Hide nametag'),
+	description = S('Make nametag hidden'),
 	func = function(name, param)
 		return hidename.hide(name)
 	end,
@@ -33,7 +33,7 @@ core.register_chatcommand(S('hidename'), {
 
 -- "showname" chat command
 core.register_chatcommand(S('showname'), {
-	description = S('Show nametag'),
+	description = S('Make nametag visible'),
 	func = function(name, param)
 		return hidename.show(name)
 	end,

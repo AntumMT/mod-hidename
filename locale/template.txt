@@ -5,8 +5,8 @@
 hidename =
 showname =
 
-Hide nametag =
-Show nametag =
+Make nametag hidden =
+Make nametag visible =
 Nametag is now hidden =
 Nametag is now visible =
 Nametag is already hidden =

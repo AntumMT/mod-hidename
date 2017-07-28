@@ -28,16 +28,23 @@ local stored_alpha = 255
 
 --- Checks if player's nametag is hidden.
 --
--- Compares value of argument ***alpha*** against 0 (0 being transparent).
+-- Compares alpha level of player's nametag against 0 (0 being transparent).
+--
 -- TODO: Check for empty string instead of alpha value
 --
+-- @param alpha Can be an integer between 0-255 or player's name string
 -- @return ***true*** if player's nametag is hidden
 function hidename.hidden(alpha)
+	if type(alpha) == 'string' then
+	local player = core.get_player_by_name(alpha)
+	alpha = player:get_nametag_attributes().color.a
+	end
+	
 	return alpha == 0
 end
 
 
---- Sends a message to the player about nametag text & visibility.
+--- Messages info to player about nametag text & visibility.
 --
 -- @param name Name of player to check & message
 function hidename.tellStatus(name)
@@ -65,7 +72,7 @@ end
 
 --- Hides a player's nametag.
 --
--- @param name Name of player whose nametag should be hidden
+-- @param name Name of player whose nametag should be made hidden
 -- @return ***true*** if player's nametag is hidden
 function hidename.hide(name)
 	local player = core.get_player_by_name(name)
@@ -98,7 +105,7 @@ end
 
 --- Makes a player's nametag visible.
 --
--- @param name Name of player whose nametag should be visible
+-- @param name Name of player whose nametag should be made visible
 -- @return ***true*** if player's nametag is visible
 function hidename.show(name)
 	local player = core.get_player_by_name(name)

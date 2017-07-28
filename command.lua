@@ -6,6 +6,9 @@
 --]]
 
 
+--- *hidename* chat commands
+
+
 -- Boilerplate to support localized strings if intllib mod is installed.
 local S
 if minetest.global_exists('intllib') then
@@ -19,7 +22,6 @@ else
 end
 
 
--- "nametag" chat command
 local params = {
 	S('hide'),
 	S('show'),
@@ -28,6 +30,18 @@ local params = {
 
 local params_string = '[' .. table.concat(params, '|') .. ']'
 
+--- *nametag* chat command.
+--
+-- Displays nametag info or sets visibility.
+--
+-- @chatcmd nametag
+-- @chatparam mode
+-- @option ***hide*** : Sets player nametag hidden
+-- @option ***show*** : Sets player nametag visible
+-- @option ***status*** : Displays nametag text & visible state (default)
+-- @usage
+-- /nametag [option]
+-- /nametag hide
 core.register_chatcommand(S('nametag'), {
 	params = params_string,
 	description = S('Get nametag info or set visibility'),
@@ -53,7 +67,12 @@ core.register_chatcommand(S('nametag'), {
 })
 
 
--- "hidename" chat command
+--- *hidename* chat command.
+--
+-- Sets player's nametag hidden from others.
+--
+-- @chatcmd hidename
+-- @usage /hidename
 core.register_chatcommand(S('hidename'), {
 	description = S('Make nametag hidden'),
 	func = function(name, param)
@@ -62,7 +81,11 @@ core.register_chatcommand(S('hidename'), {
 })
 
 
--- "showname" chat command
+--- *showname* chat command.
+--
+-- Sets player's nametag visible to others.
+-- @chatcmd showname
+-- @usage /showname
 core.register_chatcommand(S('showname'), {
 	description = S('Make nametag visible'),
 	func = function(name, param)

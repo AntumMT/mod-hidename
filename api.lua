@@ -6,6 +6,9 @@
 --]]
 
 
+--- *hidename* mod API
+
+
 -- Boilerplate to support localized strings if intllib mod is installed.
 local S
 if minetest.global_exists('intllib') then
@@ -17,9 +20,6 @@ if minetest.global_exists('intllib') then
 else
 	S = function(s) return s end
 end
-
-
---- Hide Name mod API.
 
 
 -- Default alpha level (FIXME: Should be player attribute)

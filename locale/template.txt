@@ -1,0 +1,9 @@
+# Translation by
+
+
+## Invoking command (remove this line to use default "hidename")
+hidename =
+
+Hide or show nametag =
+Setting nametag visible =
+Setting nametag hidden =

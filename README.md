@@ -12,16 +12,22 @@ A Minetest mod for hiding player nametags from view.
 
 
 ---
-### **Licensing:**
+### **Licensing**
 
 - MIT (see [LICENSE.txt](LICENSE.txt))
 
 
 ---
-### **Requirements:**
+### **Requirements**
 
-- **Depends:** none
-- **Privileges:** none
+#### Dependencies
+- **Required:** none
+- **Optional:**
+  - [intllib][]
+
+#### Privileges
+- **Required:** none
 
 
 [Minetest]: http://www.minetest.net/
+[intllib]: https://forum.minetest.net/viewtopic.php?t=4929

@@ -6,9 +6,13 @@
 
 A Minetest mod for hiding player nametags from view.
 
-- Chat command:
-  - Invocation: */hidename*
-    - Toggles player's name tag visibility
+- Chat commands:
+  - **hidename**
+    - Invocation: ***/hidename***
+    - Hides player's nametag
+  - **showname**
+    - Invocation: ***/showname***
+    - Shows player's nametag
 
 
 ---

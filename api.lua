@@ -37,6 +37,32 @@ function hidename.hidden(alpha)
 end
 
 
+--- Sends a message to the player about nametag text & visibility.
+--
+-- @param name Name of player to check & message
+function hidename.tellStatus(name)
+	local player = core.get_player_by_name(name)
+	local nametag = player:get_nametag_attributes()
+	
+	local status = 'Status: '
+	if hidename.hidden(nametag.color.a) then
+		status = status .. 'hidden'
+	else
+		status = status .. 'visible'
+	end
+	
+	-- Use parameter value if nametag.text is empty
+	-- FIXME: This may cause issues if text value is used instead of transparency
+	--        to determine if nametag is hidden
+	if nametag.text == '' then
+		nametag.text = name
+	end
+	
+	core.chat_send_player(name, S('Nametag:') .. ' ' .. nametag.text)
+	core.chat_send_player(name, S(status))
+end
+
+
 --- Hides a player's nametag.
 --
 -- @param name Name of player whose nametag should be hidden

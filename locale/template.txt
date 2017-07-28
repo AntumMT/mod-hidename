@@ -7,7 +7,9 @@ showname =
 
 Hide nametag =
 Show nametag =
-Setting nametag hidden =
-Setting nametag visible =
+Nametag is now hidden =
+Nametag is now visible =
 Nametag is already hidden =
 Nametag is already visible =
+ERROR: Could not hide nametag =
+ERROR: Could not show nametag =

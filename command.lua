@@ -1,6 +1,6 @@
 --[[ MIT LICENSE HEADER
   
-  Copyright © 2017 Jordan Irwin
+  Copyright © 2017 Jordan Irwin (AntumDeluge)
   
   See: LICENSE.txt
 --]]

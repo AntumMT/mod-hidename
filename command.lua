@@ -38,9 +38,9 @@ local params_string = '[' .. table.concat(params, '|') .. ']'
 --
 -- @chatcmd nametag
 -- @chatparam mode
--- @option ***hide*** : Sets player nametag hidden
--- @option ***show*** : Sets player nametag visible
--- @option ***status*** : Displays nametag text & visible state (default)
+-- @option ***hide*** : Sets player nametag hidden.
+-- @option ***show*** : Sets player nametag visible.
+-- @option ***status*** : Displays player nametag text & visible state in chat (default if ***option*** is omitted)
 -- @usage
 -- /nametag [option]
 -- /nametag hide
@@ -69,9 +69,7 @@ core.register_chatcommand('nametag', {
 })
 
 
---- *hidename* chat command.
---
--- Sets player's nametag hidden from others.
+--- Alias for ***/nametag hide***.
 --
 -- @chatcmd hidename
 -- @usage /hidename
@@ -83,9 +81,7 @@ core.register_chatcommand('hidename', {
 })
 
 
---- *showname* chat command.
---
--- Sets player's nametag visible to others.
+--- Alias for ***/nametag show***.
 -- @chatcmd showname
 -- @usage /showname
 core.register_chatcommand('showname', {

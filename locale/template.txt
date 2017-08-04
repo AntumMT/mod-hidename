@@ -4,7 +4,7 @@
 Nametag: =
 Status: hidden =
 Status: visible =
-Unknown parameter: =
+Error: Unknown parameter: =
 
 Make nametag hidden =
 Make nametag visible =

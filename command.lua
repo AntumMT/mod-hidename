@@ -23,9 +23,9 @@ end
 
 
 local params = {
-	S('hide'),
-	S('show'),
-	S('status'),
+	'hide',
+	'show',
+	'status',
 }
 
 local params_string = '[' .. table.concat(params, '|') .. ']'
@@ -42,7 +42,7 @@ local params_string = '[' .. table.concat(params, '|') .. ']'
 -- @usage
 -- /nametag [option]
 -- /nametag hide
-core.register_chatcommand(S('nametag'), {
+core.register_chatcommand('nametag', {
 	params = params_string,
 	description = S('Get nametag info or set visibility'),
 	func = function(name, param)
@@ -73,7 +73,7 @@ core.register_chatcommand(S('nametag'), {
 --
 -- @chatcmd hidename
 -- @usage /hidename
-core.register_chatcommand(S('hidename'), {
+core.register_chatcommand('hidename', {
 	description = S('Make nametag hidden'),
 	func = function(name, param)
 		return hidename.hide(name)
@@ -86,7 +86,7 @@ core.register_chatcommand(S('hidename'), {
 -- Sets player's nametag visible to others.
 -- @chatcmd showname
 -- @usage /showname
-core.register_chatcommand(S('showname'), {
+core.register_chatcommand('showname', {
 	description = S('Make nametag visible'),
 	func = function(name, param)
 		return hidename.show(name)

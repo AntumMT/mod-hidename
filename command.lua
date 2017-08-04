@@ -7,6 +7,8 @@
 
 
 --- *hidename* chat commands
+--
+-- @script command.lua
 
 
 -- Boilerplate to support localized strings if intllib mod is installed.

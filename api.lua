@@ -7,6 +7,8 @@
 
 
 --- *hidename* mod API
+--
+-- @script api.lua
 
 
 -- Boilerplate to support localized strings if intllib mod is installed.

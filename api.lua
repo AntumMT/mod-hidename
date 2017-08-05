@@ -148,3 +148,19 @@ function hidename.show(name)
 	
 	return shown
 end
+
+
+-- Ensure that nametag text attribute is not empty when player logs on
+if not hidename.use_alpha then
+	-- Sets the player's nametag text attribute to player name.
+	local function setNametagText(player)
+		local nametag = player:get_nametag_attributes()
+		if nametag.text == '' or nametag.text == nil then
+			player:set_nametag_attributes({
+				text = player:get_player_name(),
+			})
+		end
+	end
+	
+	core.register_on_joinplayer(setNametagText)
+end

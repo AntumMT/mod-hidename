@@ -24,10 +24,6 @@ else
 end
 
 
--- Default alpha level (FIXME: Should be player attribute)
-local stored_alpha = 255
-
-
 --- Checks if player's nametag is hidden.
 --
 -- Compares alpha level of player's nametag against 0 (0 being transparent).
@@ -83,6 +79,8 @@ function hidename.hide(name)
 	end
 	
 	if hidename.use_alpha then
+		-- Preserve nametag alpha level
+		player:set_attribute('nametag_stored_alpha', nametag.color.a)
 		nametag.color.a = 0
 		
 		-- Set nametag alpha level to 0
@@ -123,7 +121,12 @@ function hidename.show(name)
 	
 	if hidename.use_alpha then
 		-- Restore nametag alpha level
-		nametag.color.a = stored_alpha
+		local stored_alpha = player:get_attribute('nametag_stored_alpha')
+		if stored_alpha ~= nil then
+			nametag.color.a = stored_alpha
+			-- Reset player attribute
+			player:set_attribute('nametag_stored_alpha', nil)
+		end
 		
 		player:set_nametag_attributes({
 			color = nametag.color,

@@ -32,6 +32,10 @@ custom_tags = {
 		title = 'Type',
 		format = italic,
 	},
+	{'default',
+		title = 'Default',
+		format = italic,
+	},
 }
 
 custom_display_name_handler = function(item, default_handler)

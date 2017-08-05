@@ -5,6 +5,11 @@ not_luadoc = true
 
 file = {'api.lua', 'command.lua'}
 
+local function italic(value)
+	return '<i>' .. value .. '</i>'
+end
+
+new_type('setting', 'Settings')
 new_type('chatcmd', 'Chat Commands', false, 'option')
 custom_tags = {
 	{
@@ -22,6 +27,10 @@ custom_tags = {
 			return '<b><i>' .. name .. '</i></b>'
 		end,
 		]]
+	},
+	{'settype',
+		title = 'Type',
+		format = italic,
 	},
 }
 

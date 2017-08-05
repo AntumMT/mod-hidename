@@ -11,7 +11,7 @@
 -- @script settings.lua
 
 
---- Use nametag's alpha color level to hide instead of clearing nametag text.
+--- Use alpha color level to hide nametag instead of clearing text.
 -- 
 -- @setting hidename.use_alpha
 -- @settype bool

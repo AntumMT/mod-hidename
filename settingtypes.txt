@@ -1,0 +1,3 @@
+
+# Use nametag's alpha color level to hide instead of clearing nametag text.
+hidename.use_alpha (Use nametag alpha level) bool true

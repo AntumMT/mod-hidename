@@ -34,15 +34,10 @@ local stored_alpha = 255
 --
 -- TODO: Check for empty string instead of alpha value
 --
--- @param alpha Can be an integer between 0-255 or player's name string
+-- @tparam table nametag_data Nametag data retrieved by *player:get_nametag_attributes()*.
 -- @treturn bool ***true*** if player's nametag is hidden
-function hidename.hidden(alpha)
-	if type(alpha) == 'string' then
-	local player = core.get_player_by_name(alpha)
-	alpha = player:get_nametag_attributes().color.a
-	end
-	
-	return alpha == 0
+function hidename.hidden(nametag_data)
+	return nametag_data.color.a == 0
 end
 
 
@@ -54,7 +49,7 @@ function hidename.tellStatus(name)
 	local nametag = player:get_nametag_attributes()
 	
 	local status = 'Status: '
-	if hidename.hidden(nametag.color.a) then
+	if hidename.hidden(nametag) then
 		status = status .. 'hidden'
 	else
 		status = status .. 'visible'
@@ -78,17 +73,17 @@ end
 -- @treturn bool ***true*** if player's nametag is hidden
 function hidename.hide(name)
 	local player = core.get_player_by_name(name)
-	local nametag_color = player:get_nametag_attributes().color
+	local nametag = player:get_nametag_attributes()
 	
-	if hidename.hidden(nametag_color.a) then
+	if hidename.hidden(nametag) then
 		core.chat_send_player(name, S('Nametag is already hidden'))
 		return true
 	end
 	
 	-- Set nametag alpha level to 0
-	nametag_color.a = 0
+	nametag.color.a = 0
 	player:set_nametag_attributes({
-		color = nametag_color,
+		color = nametag.color,
 	})
 	
 	-- Test new alpha level
@@ -111,18 +106,17 @@ end
 -- @treturn bool ***true*** if player's nametag is visible
 function hidename.show(name)
 	local player = core.get_player_by_name(name)
-	local nametag_color = player:get_nametag_attributes().color
-	local alpha = nametag_color.a
+	local nametag = player:get_nametag_attributes()
 	
-	if not hidename.hidden(alpha) then
+	if not hidename.hidden(nametag) then
 		core.chat_send_player(name, S('Nametag is already visible'))
 		return true
 	end
 	
 	-- Restore nametag alpha level (currently static)
-	nametag_color.a = stored_alpha
+	nametag.color.a = stored_alpha
 	player:set_nametag_attributes({
-		color = nametag_color,
+		color = nametag.color,
 	})
 	
 	-- Test new alpha level

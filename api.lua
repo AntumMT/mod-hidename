@@ -89,7 +89,7 @@ function hidename.hide(name)
 		})
 	else
 		-- Remove text from nametag
-		player.set_nametag_attributes({
+		player:set_nametag_attributes({
 			text = '',
 		})
 	end

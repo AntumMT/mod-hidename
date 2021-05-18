@@ -8,7 +8,7 @@
 
 --- *hidename* mod API
 --
--- @script api.lua
+--  @script api.lua
 
 
 local S = core.get_translator(hidename.modname)
@@ -16,12 +16,8 @@ local S = core.get_translator(hidename.modname)
 
 --- Checks if player's nametag is hidden.
 --
--- Compares alpha level of player's nametag against 0 (0 being transparent).
---
--- TODO: Check for empty string instead of alpha value
---
--- @tparam table nametag_data Nametag data retrieved by *player:get_nametag_attributes()*.
--- @treturn bool ***true*** if player's nametag is hidden
+--  @tparam table nametag_data Nametag data retrieved by *player:get_nametag_attributes()*.
+--  @treturn bool `true` if player's nametag is hidden
 function hidename.hidden(nametag_data)
 	if hidename.use_alpha then
 		return nametag_data.color.a == 0
@@ -37,7 +33,7 @@ end
 
 --- Messages info to player about nametag text & visibility.
 --
--- @tparam string name Name of player to check & message
+--  @tparam string name Name of player to check & message
 function hidename.tellStatus(name)
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()
@@ -61,8 +57,8 @@ end
 
 --- Hides a player's nametag.
 --
--- @tparam string name Name of player whose nametag should be made hidden
--- @treturn bool ***true*** if player's nametag is hidden
+--  @tparam string name Name of player whose nametag should be made hidden
+--  @treturn bool `true` if player's nametag is hidden
 function hidename.hide(name)
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()
@@ -106,8 +102,8 @@ end
 
 --- Makes a player's nametag visible.
 --
--- @tparam string name Name of player whose nametag should be made visible
--- @treturn bool ***true*** if player's nametag is visible
+--  @tparam string name Name of player whose nametag should be made visible
+--  @treturn bool `true` if player's nametag is visible
 function hidename.show(name)
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()

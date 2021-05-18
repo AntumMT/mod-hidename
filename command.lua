@@ -8,7 +8,7 @@
 
 --- *hidename* chat commands
 --
--- @script command.lua
+--  @script command.lua
 
 
 local S = core.get_translator(hidename.modname)
@@ -24,16 +24,16 @@ local params_string = "[" .. table.concat(params, "|") .. "]"
 
 --- *nametag* chat command.
 --
--- Displays nametag info or sets visibility.
+--  Displays nametag info or sets visibility.
 --
--- @chatcmd nametag
--- @chatparam mode
--- @option ***hide*** : Sets player nametag hidden.
--- @option ***show*** : Sets player nametag visible.
--- @option ***status*** : Displays player nametag text & visible state in chat (default if ***option*** is omitted)
--- @usage
--- /nametag [option]
--- /nametag hide
+--  @chatcmd nametag
+--  @chatparam mode
+--  @option ***hide*** : Sets player nametag hidden.
+--  @option ***show*** : Sets player nametag visible.
+--  @option ***status*** : Displays player nametag text & visible state in chat (default if ***option*** is omitted)
+--  @usage
+--  /nametag [option]
+--  /nametag hide
 core.register_chatcommand("nametag", {
 	params = params_string,
 	description = S("Get nametag info or set visibility"),
@@ -61,8 +61,8 @@ core.register_chatcommand("nametag", {
 
 --- Alias for ***/nametag hide***.
 --
--- @chatcmd hidename
--- @usage /hidename
+--  @chatcmd hidename
+--  @usage /hidename
 core.register_chatcommand("hidename", {
 	description = S("Make nametag hidden"),
 	func = function(name, param)
@@ -72,8 +72,9 @@ core.register_chatcommand("hidename", {
 
 
 --- Alias for ***/nametag show***.
--- @chatcmd showname
--- @usage /showname
+--
+--  @chatcmd showname
+--  @usage /showname
 core.register_chatcommand("showname", {
 	description = S("Make nametag visible"),
 	func = function(name, param)

@@ -79,6 +79,7 @@ function hidename.hide(name)
 		})
 	else
 		-- Remove text from nametag
+		-- FIXME: doesn't work
 		player:set_nametag_attributes({
 			text = "",
 		})

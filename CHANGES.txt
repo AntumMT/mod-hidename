@@ -4,6 +4,7 @@
 - uses Minetest's built-in localization engine
 - updated for Minetest 5.0 API
 - fixed clearing text when "hidename.use_alpha" not enabled
+- custom nametag text will be restored if set instead of player name
 
 
 1.0

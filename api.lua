@@ -68,17 +68,20 @@ function hidename.hide(name)
 		return true
 	end
 
+	local pmeta = player:get_meta()
 	if hidename.use_alpha then
 		-- Preserve nametag alpha level
-		player:get_meta():set_int("nametag_stored_alpha", nametag.color.a)
+		pmeta:set_int("nametag_stored_alpha", nametag.color.a)
 
 		-- Set nametag alpha level to 0
 		nametag.color.a = 0
 		player:set_nametag_attributes(nametag)
 	else
+		-- preserve original nametag text (might be different than player name)
+		pmeta:set_string("nametag_stored_text", nametag.text)
 		-- preserve original nametag bg color (we store entire color
 		-- because bgcolor attribute can be boolean)
-		player:get_meta():set_string("nametag_stored_bgcolor", core.serialize(nametag.bgcolor))
+		pmeta:set_string("nametag_stored_bgcolor", core.serialize(nametag.bgcolor))
 
 		-- remove text from nametag
 		nametag.text = " " -- HACK: empty nametag triggers using player name
@@ -120,11 +123,16 @@ function hidename.show(name)
 		player:get_meta():set_string("nametag_stored_alpha", nil)
 	else
 		-- restore nametag text & bg color
-		nametag.text = name
+		nametag.text = pmeta:get_string("nametag_stored_text")
+		if nametag.text:trim() == "" then
+			nametag.text = nil
+		end
 		nametag.bgcolor = core.deserialize(pmeta:get_string("nametag_stored_bgcolor"))
+
 		player:set_nametag_attributes(nametag)
 
 		-- clean meta info
+		pmeta:set_string("nametag_stored_text", nil)
 		pmeta:set_string("nametag_stored_bgcolor", nil)
 	end
 
@@ -135,20 +143,4 @@ function hidename.show(name)
 		core.log("error", "Could not set nametag to \"visible\" for player " .. name)
 		core.log("error", "Please submit an error report to the \"hidename\" mod developer")
 	end
-end
-
-
--- Ensure that nametag text attribute is not empty when player logs on
-if not hidename.use_alpha then
-	-- Sets the player's nametag text attribute to player name.
-	local function setNametagText(player)
-		local nametag = player:get_nametag_attributes()
-		if nametag.text == "" or nametag.text == nil then
-			player:set_nametag_attributes({
-				text = player:get_player_name(),
-			})
-		end
-	end
-
-	core.register_on_joinplayer(setNametagText)
 end

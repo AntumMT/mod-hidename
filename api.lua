@@ -27,7 +27,7 @@ function hidename.hidden(nametag_data)
 		return nametag_data.color.a == 0
 	end
 
-	return nametag_data.text == "" or nametag_data.text == nil
+	return not nametag_data.text or nametag_data.text:trim() == ""
 end
 
 
@@ -46,7 +46,7 @@ function hidename.tellStatus(name)
 	end
 
 	-- Use name parameter value if nametag.text is empty
-	if nametag.text == "" or nametag.text == nil then
+	if not nametag.text or nametag.text:trim() == "" then
 		nametag.text = name
 	end
 
@@ -78,11 +78,15 @@ function hidename.hide(name)
 			color = nametag.color,
 		})
 	else
-		-- Remove text from nametag
-		-- FIXME: doesn't work
-		player:set_nametag_attributes({
-			text = "",
-		})
+		-- preserve original nametag bg color (we store entire color
+		-- because bgcolor attribute can be boolean)
+		player:get_meta():set_string("nametag_stored_bgcolor", core.serialize(nametag.bgcolor))
+
+		-- remove text from nametag
+		nametag.text = " " -- HACK: empty nametag triggers using player name
+		nametag.bgcolor = {a=0, r=255, g=255, b=255} -- can't just set alpha because may be a boolean value
+
+		player:set_nametag_attributes(nametag)
 	end
 
 	if hidename.hidden(player:get_nametag_attributes()) then
@@ -108,9 +112,8 @@ function hidename.show(name)
 		return true
 	end
 
+	local pmeta = player:get_meta()
 	if hidename.use_alpha then
-		local pmeta = player:get_meta()
-
 		-- Restore nametag alpha level
 		local stored_alpha = pmeta:get_int("nametag_stored_alpha")
 		nametag.color.a = stored_alpha
@@ -120,10 +123,13 @@ function hidename.show(name)
 			color = nametag.color,
 		})
 	else
-		-- Restore nametag text
-		player:set_nametag_attributes({
-			text = name,
-		})
+		-- restore nametag text & bg color
+		nametag.text = name
+		nametag.bgcolor = core.deserialize(pmeta:get_string("nametag_stored_bgcolor"))
+		player:set_nametag_attributes(nametag)
+
+		-- clean meta info
+		pmeta:set_string("nametag_stored_bgcolor", nil)
 	end
 
 	if not hidename.hidden(player:get_nametag_attributes()) then

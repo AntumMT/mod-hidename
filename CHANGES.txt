@@ -4,6 +4,7 @@
 - uses Minetest's built-in localization engine
 - hidename.use_alpha setting enabled by default
 - updated for Minetest 5.0 API
+- fixed clearing text when "hidename.use_alpha" not enabled
 
 
 1.0

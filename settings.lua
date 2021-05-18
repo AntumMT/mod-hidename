@@ -16,4 +16,4 @@
 -- @setting hidename.use_alpha
 -- @settype bool
 -- @default false
-hidename.use_alpha = core.settings:get_bool('hidename.use_alpha', false)
+hidename.use_alpha = core.settings:get_bool("hidename.use_alpha", false)

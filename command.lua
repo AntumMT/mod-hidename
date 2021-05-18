@@ -1,7 +1,7 @@
 --[[ MIT LICENSE HEADER
-  
+
   Copyright © 2017 Jordan Irwin (AntumDeluge)
-  
+
   See: LICENSE.txt
 --]]
 
@@ -15,12 +15,12 @@ local S = core.get_translator(hidename.modname)
 
 
 local params = {
-	'hide',
-	'show',
-	'status',
+	"hide",
+	"show",
+	"status",
 }
 
-local params_string = '[' .. table.concat(params, '|') .. ']'
+local params_string = "[" .. table.concat(params, "|") .. "]"
 
 --- *nametag* chat command.
 --
@@ -34,26 +34,26 @@ local params_string = '[' .. table.concat(params, '|') .. ']'
 -- @usage
 -- /nametag [option]
 -- /nametag hide
-core.register_chatcommand('nametag', {
+core.register_chatcommand("nametag", {
 	params = params_string,
-	description = S('Get nametag info or set visibility'),
+	description = S("Get nametag info or set visibility"),
 	func = function(name, param)
 		-- Split parameters into case-insensitive list
-		param = string.split(string.lower(param), ' ')
-		
+		param = string.split(string.lower(param), " ")
+
 		local mode = param[1]
-		
+
 		-- Default to "status"
-		if mode == nil or mode == 'status' then
+		if mode == nil or mode == "status" then
 			hidename.tellStatus(name)
 			return true
-		elseif mode == 'hide' then
+		elseif mode == "hide" then
 			return hidename.hide(name)
-		elseif mode == 'show' then
+		elseif mode == "show" then
 			return hidename.show(name)
 		end
-		
-		core.chat_send_player(name, S('Error: Unknown parameter:') .. ' ' .. mode)
+
+		core.chat_send_player(name, S("Error: Unknown parameter:") .. " " .. mode)
 		return false
 	end
 })
@@ -63,8 +63,8 @@ core.register_chatcommand('nametag', {
 --
 -- @chatcmd hidename
 -- @usage /hidename
-core.register_chatcommand('hidename', {
-	description = S('Make nametag hidden'),
+core.register_chatcommand("hidename", {
+	description = S("Make nametag hidden"),
 	func = function(name, param)
 		return hidename.hide(name)
 	end,
@@ -74,8 +74,8 @@ core.register_chatcommand('hidename', {
 --- Alias for ***/nametag show***.
 -- @chatcmd showname
 -- @usage /showname
-core.register_chatcommand('showname', {
-	description = S('Make nametag visible'),
+core.register_chatcommand("showname", {
+	description = S("Make nametag visible"),
 	func = function(name, param)
 		return hidename.show(name)
 	end,

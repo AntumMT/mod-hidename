@@ -27,7 +27,11 @@ function hidename.hidden(nametag_data)
 		return nametag_data.color.a == 0
 	end
 
-	return not nametag_data.text or nametag_data.text:trim() == ""
+	if nametag_data.text then
+		return nametag_data.text:len() > 0 and nametag_data.text:trim() == ""
+	end
+
+	return false
 end
 
 

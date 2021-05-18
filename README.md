@@ -20,6 +20,13 @@ Chat commands:
 - ***/showname***
   - alias for `/nametag show`
 
+Settings:
+
+- ***hidename.use_alpha***
+  - use alpha color level to hide nametag instead of clearing text
+  - type: *bool*
+  - default: *false*
+
 ---
 ### Licensing:
 

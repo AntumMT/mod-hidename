@@ -53,7 +53,7 @@ core.register_chatcommand("nametag", {
 			return hidename.show(name)
 		end
 
-		core.chat_send_player(name, S("Error: Unknown parameter:") .. " " .. mode)
+		core.chat_send_player(name, S("Error: Unknown parameter: @1", mode))
 		return false
 	end
 })

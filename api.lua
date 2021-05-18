@@ -70,7 +70,7 @@ function hidename.hide(name)
 
 	if hidename.use_alpha then
 		-- Preserve nametag alpha level
-		player:set_attribute("nametag_stored_alpha", nametag.color.a)
+		player:get_meta():set_int("nametag_stored_alpha", nametag.color.a)
 		nametag.color.a = 0
 
 		-- Set nametag alpha level to 0
@@ -109,14 +109,13 @@ function hidename.show(name)
 	end
 
 	if hidename.use_alpha then
-		-- Restore nametag alpha level
-		local stored_alpha = player:get_attribute("nametag_stored_alpha")
-		if stored_alpha ~= nil then
-			nametag.color.a = stored_alpha
-			-- Reset player attribute
-			player:set_attribute("nametag_stored_alpha", nil)
-		end
+		local pmeta = player:get_meta()
 
+		-- Restore nametag alpha level
+		local stored_alpha = pmeta:get_int("nametag_stored_alpha")
+		nametag.color.a = stored_alpha
+		-- Reset player attribute
+		player:get_meta():set_string("nametag_stored_alpha", nil)
 		player:set_nametag_attributes({
 			color = nametag.color,
 		})

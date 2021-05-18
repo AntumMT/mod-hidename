@@ -54,7 +54,7 @@ function hidename.tellStatus(name)
 		nametag.text = name
 	end
 
-	core.chat_send_player(name, S("Nametag:") .. " " .. nametag.text)
+	core.chat_send_player(name, S("Nametag: @1", nametag.text))
 	core.chat_send_player(name, S(status))
 end
 

@@ -1,11 +1,9 @@
 ## Hide Name mod for Minetest
 
----
 ### Description:
 
 A [Minetest](http://www.minetest.net/) mod that allows players to hide their nametags from view.
 
----
 ### Usage:
 
 Chat commands:
@@ -27,12 +25,10 @@ Settings:
   - type: *bool*
   - default: *false*
 
----
 ### Licensing:
 
 - [MIT](LICENSE.txt)
 
----
 ### Requirements:
 
 #### Dependencies:
@@ -44,7 +40,6 @@ Settings:
 
 - **Required:** none
 
----
 ### Links:
 
 - [![ContentDB](https://content.minetest.net/packages/AntumDeluge/hidename/shields/title/)](https://content.minetest.net/AntumDeluge/hidename/)

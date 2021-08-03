@@ -47,6 +47,7 @@ Settings:
 ---
 ### Links:
 
+- [![ContentDB](https://content.minetest.net/packages/AntumDeluge/hidename/shields/title/)](https://content.minetest.net/AntumDeluge/hidename/)
 - [Forum](https://forum.minetest.net/viewtopic.php?t=18190)
 - [Git repo](https://github.com/AntumMT/mod-hidename)
 - [API Reference](http://antummt.github.io/mod-hidename/docs/api.html)

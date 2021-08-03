@@ -49,6 +49,6 @@ Settings:
 
 - [Forum](https://forum.minetest.net/viewtopic.php?t=18190)
 - [Git repo](https://github.com/AntumMT/mod-hidename)
-- [API](http://antummt.github.io/mod-hidename/docs/api.html)
-- [Changelog](https://github.com/AntumMT/mod-hidename/blob/master/CHANGES.txt)
-- [TODO](https://github.com/AntumMT/mod-hidename/blob/master/TODO.txt)
+- [API Reference](http://antummt.github.io/mod-hidename/docs/api.html)
+- [Changelog](changelog.txt)
+- [TODO](TODO.txt)

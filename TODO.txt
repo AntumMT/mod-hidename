@@ -3,3 +3,5 @@ TODO:
 - retrieve custom nametag text if set when checking status
 - check if "nametag" chat command is already in use before registering
 - make compatible with "invisible" mod /vanish command & "invisibility" mod
+- add Spanish translation
+- remove deprecated "alpha" mode & setting

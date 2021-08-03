@@ -1,4 +1,6 @@
-# Translation by:
+# textdomain:hidename
+
+# Translators:
 
 
 Nametag: @1=

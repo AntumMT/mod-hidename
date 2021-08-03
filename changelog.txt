@@ -1,4 +1,9 @@
 
+next
+----
+- added missing "textdomain" line to localization template
+
+
 v1.1
 ----
 - uses Minetest's built-in localization engine

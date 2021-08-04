@@ -4,6 +4,7 @@ next
 - added missing "textdomain" line to localization template
 - added Spanish translation
 - fixed status not retrieving custom nametag text when hidden
+- compatible with invisibility mod ( https://content.minetest.net/packages/TenPlus1/invisibility/ )
 
 
 v1.1

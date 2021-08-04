@@ -1,3 +1,2 @@
 
 TODO:
-- make compatible with "invisible" mod /vanish command & "invisibility" mod

@@ -14,13 +14,23 @@
 local S = core.get_translator(hidename.modname)
 
 
+-- compatibility with "invisibility" mod
+local invisibility = invisibility
+
+
 --- Checks if player's nametag is hidden.
 --
 --  @tparam table nametag_data Nametag data retrieved by *player:get_nametag_attributes()*.
+--  @tparam[opt] string pname Player name.
 --  @treturn bool `true` if player's nametag is hidden
-function hidename.hidden(nametag_data)
+function hidename.hidden(nametag_data, pname)
 	if hidename.use_alpha then
 		return nametag_data.color.a == 0
+	end
+
+	-- check "invisibility" mod
+	if invisibility and invisibility[pname] then
+		return true
 	end
 
 	if nametag_data.text then
@@ -39,7 +49,7 @@ function hidename.tellStatus(name)
 	local nametag = player:get_nametag_attributes()
 
 	local status = "Status: @1"
-	if hidename.hidden(nametag) then
+	if hidename.hidden(nametag, name) then
 		status = S(status, S("hidden"))
 	else
 		status = S(status, S("visible"))
@@ -66,7 +76,7 @@ function hidename.hide(name)
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()
 
-	if hidename.hidden(nametag) then
+	if hidename.hidden(nametag, name) then
 		core.chat_send_player(name, S("Nametag is already hidden"))
 		return true
 	end
@@ -93,7 +103,7 @@ function hidename.hide(name)
 		player:set_nametag_attributes(nametag)
 	end
 
-	if hidename.hidden(player:get_nametag_attributes()) then
+	if hidename.hidden(player:get_nametag_attributes(), name) then
 		core.chat_send_player(name, S("Nametag is now hidden"))
 	else
 		core.chat_send_player(name, S("ERROR: Could not hide nametag"))
@@ -108,10 +118,15 @@ end
 --  @tparam string name Name of player whose nametag should be made visible
 --  @treturn bool `true` if player's nametag is visible
 function hidename.show(name)
+	if invisibility and invisibility[name] then
+		core.chat_send_player(name, S("Cannot make nametag visible while you are invisible"))
+		return false
+	end
+
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()
 
-	if not hidename.hidden(nametag) then
+	if not hidename.hidden(nametag, name) then
 		core.chat_send_player(name, S("Nametag is already visible"))
 		return true
 	end
@@ -139,7 +154,7 @@ function hidename.show(name)
 		pmeta:set_string("nametag_stored_bgcolor", nil)
 	end
 
-	if not hidename.hidden(player:get_nametag_attributes()) then
+	if not hidename.hidden(player:get_nametag_attributes(), name) then
 		core.chat_send_player(name, S("Nametag is now visible"))
 	else
 		core.chat_send_player(name, S("ERROR: Could not show nametag"))

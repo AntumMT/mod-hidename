@@ -1,0 +1,19 @@
+# textdomain:hidename
+
+# Translators: Jordan Irwin (AntumDeluge)
+
+
+Nametag: @1=Placa de nombre: @1
+hidden=escondido
+Status: @1=Estado: @1
+Nametag is already hidden=Ya estaba escondido nombre
+Nametag is already visible=Ya estaba visible nombre
+Nametag is now hidden=Ahora està escondido nombre
+Nametag is now visible=Ahora està visible nombre
+Make nametag hidden=Esconder nombre
+Make nametag visible=Hacer visible nombre
+Get nametag info or set visibility=Obtener el estado de placa de nombre o establecer visibilidad
+
+ERROR: Unknown parameter: @1=ERROR: Parámetro desconocido: @1
+ERROR: Could not hide nametag=ERROR: No se pudo esconder nombre
+ERROR: Could not show nametag=ERROR: No se pudo hacer visible nombre

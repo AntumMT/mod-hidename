@@ -2,4 +2,4 @@
 TODO:
 - retrieve custom nametag text if set when checking status
 - make compatible with "invisible" mod /vanish command & "invisibility" mod
-- add Spanish translation
+- add chat command help details

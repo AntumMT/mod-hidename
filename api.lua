@@ -120,7 +120,7 @@ end
 function hidename.show(name)
 	if invisibility and invisibility[name] then
 		core.chat_send_player(name, S("Cannot make nametag visible while you are invisible"))
-		return false
+		return true
 	end
 
 	local player = core.get_player_by_name(name)

@@ -1,5 +1,5 @@
 
-next
+v1.2
 ----
 - added missing "textdomain" line to localization template
 - added Spanish translation

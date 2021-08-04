@@ -4,15 +4,16 @@
 
 
 Nametag: @1=
-Status: hidden=
-Status: visible=
-
-Make nametag hidden=
-Make nametag visible=
-Nametag is now hidden=
-Nametag is now visible=
+hidden=
+visible=
+Status: @1=
 Nametag is already hidden=
 Nametag is already visible=
+Nametag is now hidden=
+Nametag is now visible=
+Make nametag hidden=
+Make nametag visible=
+Get nametag info or set visibility=
 
 ERROR: Unknown parameter: @1=
 ERROR: Could not hide nametag=

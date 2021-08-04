@@ -38,11 +38,11 @@ function hidename.tellStatus(name)
 	local player = core.get_player_by_name(name)
 	local nametag = player:get_nametag_attributes()
 
-	local status = "Status: "
+	local status = "Status: @1"
 	if hidename.hidden(nametag) then
-		status = status .. "hidden"
+		status = S(status, S("hidden"))
 	else
-		status = status .. "visible"
+		status = S(status, S("visible"))
 	end
 
 	-- Use name parameter value if nametag.text is empty
@@ -51,7 +51,7 @@ function hidename.tellStatus(name)
 	end
 
 	core.chat_send_player(name, S("Nametag: @1", nametag.text))
-	core.chat_send_player(name, S(status))
+	core.chat_send_player(name, status)
 end
 
 

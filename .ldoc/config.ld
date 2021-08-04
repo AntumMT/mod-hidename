@@ -1,46 +1,247 @@
-title = 'Hide Name mod for Minetest'
-project = 'Hide Name'
-format = 'markdown'
-not_luadoc = true
 
-file = {'api.lua', 'command.lua'}
-
-local function italic(value)
-	return '<i>' .. value .. '</i>'
+local dofile, print, error, type, table, ipairs, string, tostring
+if import then
+	dofile = import("dofile")
+	print = import("print")
+	error = import("error")
+	type = import("type")
+	table = import("table")
+	ipairs = import("ipairs")
+	string = import("string")
+	tostring = import("tostring")
 end
 
-new_type('setting', 'Settings')
-new_type('chatcmd', 'Chat Commands', false, 'option')
-custom_tags = {
-	{
-		'chatparam',
-		hidden = true,
-	},
-	{
-		'option',
-		title = 'Options',
-		--[[
-		format = function(item, handler)
-			print(type(handler))
-			print(type(item))
-			print(item)
-			return '<b><i>' .. name .. '</i></b>'
-		end,
-		]]
-	},
-	{'settype',
-		title = 'Type',
-		format = italic,
-	},
-	{'default',
-		title = 'Default',
-		format = italic,
-	},
+project = "Hide Name"
+title = "Hide Name mod for Minetest"
+format = "markdown"
+boilerplate = true
+not_luadoc = true
+favicon = "https://www.minetest.net/media/icon.svg"
+
+file = {
+	"api.lua",
+	"command.lua"
 }
 
-custom_display_name_handler = function(item, default_handler)
-	if item.type == 'chatcmd' and item.tags.chatparam then
-		return item.name .. ' [option]'
+new_type("chatcmd", "Chat Commands")
+new_type("setting", "Settings")
+
+
+local function video_frame(src)
+	return '<iframe width="560" height="315" src="' .. src
+		.. '" title="Video Player" frameborder="0"'
+		.. ' allow="fullscreen;"></iframe>'
+end
+
+
+local tags
+tags, custom_tags = dofile(".ldoc/tags.ld")
+
+
+-- START: handling items to prevent re-parsing
+
+local registered_items = {}
+
+local function is_registered(item)
+	if not registered_items[item.type] then return false end
+
+	for _, tbl in ipairs(registered_items[item.type]) do
+		if item == tbl then
+			return true
+		end
 	end
+
+	return false
+end
+
+local function register(item)
+	if not registered_items[item.type] then
+		registered_items[item.type] = {}
+	end
+
+	if not is_registered(item) then
+		table.insert(registered_items[item.type], item)
+	end
+end
+
+-- END:
+
+
+local function format_setting_tag(desc, value)
+	return "\n- <span style=\"font-size:80%;\">`" .. desc .. ":`</span> `" .. value .. "`"
+end
+
+local function setting_handler(item)
+	if not ipairs or not type then
+		return item
+	end
+
+	local tags = {
+		{"settype", "type"},
+		{"default"},
+		{"min", "minimum value"},
+		{"max", "maximum value"},
+	}
+
+	local def = {
+		["settype"] = format_setting_tag("type", "string"),
+	}
+
+	for _, t in ipairs(tags) do
+		local name = t[1]
+		local desc = t[2]
+		if not desc then desc = name end
+
+		local value = item.tags[name]
+		if type(value) == "table" then
+			if #value > 1 then
+				local msg = item.file.filename .. " (line " .. item.lineno
+					.. "): multiple instances of tag \"" .. name .. "\" found"
+				if error then
+					error(msg)
+				elseif print then
+					print("WARNING: " .. msg)
+				end
+			end
+
+			if value[1] then
+				def[name] = format_setting_tag(desc, value[1])
+			end
+		end
+	end
+
+	item.description = item.description .. "\n\n**Definition:**\n" .. def.settype
+	for _, t in ipairs({def.default, def.min, def.max}) do
+		if t then
+			item.description = item.description .. t
+		end
+	end
+
+	return item
+end
+
+local function chatcmd_handler(item)
+	for _, p in ipairs(item.params) do
+		if item.modifiers.param[p].opt then
+			item.name = item.name .. " [" .. p .. "]"
+		else
+			item.name = item.name .. " &lt;" .. p .. "&gt;"
+		end
+	end
+
+	if #item.params > 0 then
+		local pstring = "### Parameters:\n"
+		for k, param in pairs(item.params) do
+			if type(k) == "number" then
+				local value = item.params.map[param]
+
+				pstring = pstring .. '\n- <span class="parameter">'
+					.. param .. '</span>'
+
+				local modifiers = item.modifiers.param[param]
+				if modifiers and modifiers.type then
+					pstring = pstring .. ' <span class="types"><span class="type">`' .. modifiers.type .. '`</span></span>'
+				end
+
+				if value then
+					pstring = pstring .. value
+				end
+
+				if modifiers and modifiers.opt then
+					pstring = pstring .. " *(optional)*"
+				end
+			end
+		end
+
+		item.description = item.description .. "\n\n" .. pstring
+		-- clear parameter list
+		item.params = {}
+	end
+
+	return item
+end
+
+function custom_display_name_handler(item, default_handler)
+	if not is_registered(item) then
+		if item.type == "setting" then
+			item = setting_handler(item)
+		elseif item.type == "chatcmd" then
+			item = chatcmd_handler(item)
+		end
+
+		local parse_tags = {"priv", "note"}
+		for _, pt in ipairs(parse_tags) do
+			local tvalues = item.tags[pt]
+			if tvalues then
+				local tstring = ""
+
+				local title = tags.get_title(pt)
+				if title then
+					tstring = tstring .. "\n\n### " .. title .. ":\n"
+				end
+
+				for _, tv in ipairs(tvalues) do
+					tstring = tstring .. "\n- " .. tags.format(pt, tv)
+				end
+
+				item.description = item.description .. tstring
+			end
+		end
+	end
+
+	register(item)
 	return default_handler(item)
 end
+
+
+local custom_see_links = {
+	["ObjectRef"] = "https://minetest.gitlab.io/minetest/class-reference/#objectref",
+	["PlayerMetaRef"] = "https://minetest.gitlab.io/minetest/class-reference/#playermetaref",
+	["ItemDef"] = "https://minetest.gitlab.io/minetest/definition-tables/#item-definition",
+	["ItemStack"] = "https://minetest.gitlab.io/minetest/class-reference/#itemstack",
+	["groups"] = "https://minetest.gitlab.io/minetest/groups/",
+	["entity_damage_mechanism"] = "https://minetest.gitlab.io/minetest/entity-damage-mechanism/",
+	["vector"] = "https://minetest.gitlab.io/minetest/representations-of-simple-things/#positionvector",
+}
+
+local function format_custom_see(name, section)
+	local url = custom_see_links[name]
+	if not url then
+		url = ""
+	end
+
+	if not name then
+		name = ""
+	end
+
+	return name, url
+end
+
+
+custom_see_handler("^(ObjectRef)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(PlayerMetaRef)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(ItemDef)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(groups)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(entity_damage_mechanism)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(ItemStack)$", function(name, section)
+	return format_custom_see(name, section)
+end)
+
+custom_see_handler("^(vector)$", function(name, section)
+	return name, "https://minetest.gitlab.io/minetest/representations-of-simple-things/#positionvector"
+end)

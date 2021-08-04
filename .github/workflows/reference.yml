@@ -1,0 +1,29 @@
+
+name: Build Reference
+on:
+  push:
+    tags:
+    - 'v[0-9]*'
+
+jobs:
+  build:
+    name: Build Reference
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Lua
+      uses: leafo/gh-actions-lua@v8
+      with:
+        luaVersion: 5.4
+    - name: Setup Lua Rocks
+      uses: leafo/gh-actions-luarocks@v4
+    - name: Setup dependencies
+      run: luarocks install --only-deps https://raw.githubusercontent.com/lunarmodules/LDoc/master/ldoc-scm-3.rockspec
+    - name: Setup LDoc
+      run: git clone --branch=custom https://github.com/AntumDeluge/LDoc.git ldoc
+    - name: Checkout & Build Docs
+      run: git clone https://github.com/AntumMT/mod-hidename.git hidename && cd hidename && chmod +x .ldoc/build_versioned_docs.sh && ./.ldoc/build_versioned_docs.sh
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: hidename/docs/

@@ -1,4 +1,4 @@
-## Hide Name mod for Minetest
+## Hide Name
 
 ### Description:
 
@@ -6,24 +6,30 @@ A [Minetest](http://www.minetest.net/) mod that allows players to hide their nam
 
 ### Usage:
 
-Chat commands:
+##### Chat commands:
 
-- ***/nametag** [command]*
+```
+- /nametag [command]
   - commands:
-	  - *hide:* sets nametag hidden
-    - *show:* sets nametag visible
-    - *status:* prints the visible/hidden state of nametag (default)
-- ***/hidename***
+	  - hide:   sets nametag hidden
+    - show:   sets nametag visible
+    - status: prints the visible/hidden state of nametag (default)
+
+- /hidename
   - alias for `/nametag hide`
-- ***/showname***
+
+- /showname
   - alias for `/nametag show`
+```
 
-Settings:
+##### Settings:
 
-- ***hidename.use_alpha***
+```
+- hidename.use_alpha
   - use alpha color level to hide nametag instead of clearing text
-  - type: *bool*
-  - default: *false*
+  - type:    bool
+  - default: false
+```
 
 ### Licensing:
 
@@ -31,14 +37,14 @@ Settings:
 
 ### Requirements:
 
-#### Dependencies:
+```
+Dependencies:
+- Required: none
+- Optional: invisibility, invisible
 
-- **Required:** none
-- **Optional:** none
-
-#### Privileges:
-
-- **Required:** none
+Privileges:
+- Required: none
+```
 
 ### Links:
 

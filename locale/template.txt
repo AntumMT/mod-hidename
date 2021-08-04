@@ -14,6 +14,8 @@ Nametag is now visible=
 Make nametag hidden=
 Make nametag visible=
 Get nametag info or set visibility=
+Parameter options:=
+Display nametag text & visible state (default)=
 
 ERROR: Unknown parameter: @1=
 ERROR: Could not hide nametag=

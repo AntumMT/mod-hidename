@@ -13,6 +13,8 @@ Nametag is now visible=Ahora està visible nombre
 Make nametag hidden=Esconder nombre
 Make nametag visible=Hacer visible nombre
 Get nametag info or set visibility=Obtener el estado de placa de nombre o establecer visibilidad
+Parameter options:=Opciones de parámetro:
+Display nametag text & visible state (default)=Mostrar texto del nombre y estado de visibilidad (defecto)
 
 ERROR: Unknown parameter: @1=ERROR: Parámetro desconocido: @1
 ERROR: Could not hide nametag=ERROR: No se pudo esconder nombre

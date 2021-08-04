@@ -36,7 +36,11 @@ local params_string = "[" .. table.concat(params, "|") .. "]"
 --  /nametag hide
 core.register_chatcommand("nametag", {
 	params = params_string,
-	description = S("Get nametag info or set visibility"),
+	description = S("Get nametag info or set visibility") .. "\n\n"
+		.. S("Parameter options:")
+		.. "\n  hide: " .. S("Make nametag hidden")
+		.. "\n  show: " .. S("Make nametag visible")
+		.. "\n  status: " .. S("Display nametag text & visible state (default)"),
 	func = function(name, param)
 		-- Split parameters into case-insensitive list
 		param = string.split(string.lower(param), " ")

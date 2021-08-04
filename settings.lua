@@ -6,9 +6,9 @@
 ]]
 
 
---- *hidename* settings
+--- Hide Name Settings
 --
---  @script settings.lua
+--  @topic settings
 
 
 --- Use alpha color level to hide nametag instead of clearing text.

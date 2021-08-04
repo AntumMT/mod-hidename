@@ -6,9 +6,9 @@
 --]]
 
 
---- *hidename* mod API
+--- Hide Name API
 --
---  @script api.lua
+--  @topic api
 
 
 local S = core.get_translator(hidename.modname)

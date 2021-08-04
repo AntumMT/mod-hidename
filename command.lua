@@ -6,9 +6,9 @@
 --]]
 
 
---- *hidename* chat commands
+--- Hide Name Chat Commands
 --
---  @script command.lua
+--  @topic commands
 
 
 local S = core.get_translator(hidename.modname)

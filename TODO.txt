@@ -1,2 +1,3 @@
 
 TODO:
+- make compatible with invisible mod ( https://content.minetest.net/packages/AiTechEye/invisible/ )

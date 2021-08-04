@@ -32,7 +32,7 @@ mkdir -p "${d_export}"
 for vinfo in $(git tag -l --sort=-v:refname | grep "^v[0-9]"); do
 	echo -e "\nbuilding ${vinfo} docs ..."
 	git checkout ${vinfo}
-	d_temp="${d_root}/.docs_temp"
+	d_temp="${d_config}/temp"
 	mkdir -p "${d_temp}"
 
 	# backward compat

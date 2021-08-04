@@ -45,9 +45,12 @@ function hidename.tellStatus(name)
 		status = S(status, S("visible"))
 	end
 
-	-- Use name parameter value if nametag.text is empty
+	-- Use stored text or name parameter value if nametag.text is empty
 	if not nametag.text or nametag.text:trim() == "" then
-		nametag.text = name
+		nametag.text = player:get_meta():get_string("nametag_stored_text")
+		if nametag.text:trim() == "" then
+			nametag.text = name
+		end
 	end
 
 	core.chat_send_player(name, S("Nametag: @1", nametag.text))

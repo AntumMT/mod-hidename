@@ -14,8 +14,26 @@
 local S = core.get_translator(hidename.modname)
 
 
--- compatibility with "invisibility" mod
-local invisibility = invisibility
+-- START: compatibility with mods that provide "invisibility"
+
+local msupport = {
+	invisibility = invisibility,
+	invisible = invisible,
+}
+
+if msupport.invisible and msupport.invisible.toggle then
+	local invis_toggle_orig = msupport.invisible.toggle
+	msupport.invisible.toggle = function(user, ...)
+		if hidename.hidden(user:get_nametag_attributes(), user:get_player_name()) then
+			-- don't unhide player nametag
+			return
+		end
+
+		return invis_toggle_orig(user, ...)
+	end
+end
+
+-- END:
 
 
 --- Checks if player's nametag is hidden.
@@ -29,7 +47,7 @@ function hidename.hidden(nametag_data, pname)
 	end
 
 	-- check "invisibility" mod
-	if invisibility and invisibility[pname] then
+	if msupport.invisibility and msupport.invisibility[pname] then
 		return true
 	end
 
@@ -118,7 +136,7 @@ end
 --  @tparam string name Name of player whose nametag should be made visible
 --  @treturn bool `true` if player's nametag is visible
 function hidename.show(name)
-	if invisibility and invisibility[name] then
+	if msupport.invisibility and msupport.invisibility[name] then
 		core.chat_send_player(name, S("Cannot make nametag visible while you are invisible"))
 		return true
 	end
